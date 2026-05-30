@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 
 namespace RTTD;
 
@@ -20,19 +21,38 @@ public partial class Entity : RigidBody2D
         }
     }
 
+    // TODO: to improve
     public bool TryGetComponent<T>(out T component) where T : EntityComponent
     {
-        component = GetComponent<T>();
-        return component != null;
+        var children = GetChildren();
+        for (var i = 0; i < children.Count; i++)
+        {
+            if (children[i] is T wantedComponent)
+            {
+                component = wantedComponent;
+                return true;
+            }
+        }
+
+        component = null;
+        return false;
+    }
+    
+    // TODO: to improve
+    public bool HasComponent<T>() where T : EntityComponent
+    {
+        Array<Node> children = GetChildren();
+        for (var i = 0; i < children.Count; i++)
+        {
+            if (children[i] is T)
+                return true;
+        }
+
+        return false;
     }
 
     public T GetComponent<T>() where T : EntityComponent
     {
-        T result = GetNode<T>(typeof(T).Name);
-        if (result == null)
-        {
-            Logger.LogError(this, $"No component '{typeof(T).Name}' on entity '{GetName()}'");
-        }
         return GetNode<T>(typeof(T).Name);
     }
 
