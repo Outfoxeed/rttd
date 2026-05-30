@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://cm12x6kvm6tx6"]
+
+[ext_resource type="Script" uid="uid://0a7lk2750m1d" path="res://rttd/core/entity/Entity.cs" id="1_hp4hs"]
+[ext_resource type="PackedScene" uid="uid://m8w3vj7rvvx7" path="res://rttd/core/entity/unit_entity.tscn" id="1_ok8j6"]
+[ext_resource type="Script" uid="uid://bpxp3eagmtv8s" path="res://rttd/core/rts/systems/RTSSelectionSystem.cs" id="4_ik0d0"]
+[ext_resource type="Script" uid="uid://8mmemjm8fgo6" path="res://rttd/core/rts/systems/RTSOrderSystem.cs" id="5_ok8j6"]
+[ext_resource type="Script" uid="uid://cj5gmash67mt2" path="res://rttd/impl/TreeComponent.cs" id="6_awap8"]
+[ext_resource type="Texture2D" uid="uid://dl4qe57ka51b" path="res://pixel.png" id="6_oflq4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_oflq4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_awap8"]
+radius = 7.0
+
+[node name="World" type="Node2D"]
+
+[node name="Entity" parent="." instance=ExtResource("1_ok8j6")]
+
+[node name="Entity2" parent="." instance=ExtResource("1_ok8j6")]
+position = Vector2(-156, -31)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="RTSSelectionSystem" type="Node2D" parent="." node_paths=PackedStringArray("_selectionVisual")]
+script = ExtResource("4_ik0d0")
+_selectionVisual = NodePath("SelectionVisual")
+_selectionVisualBaseSize = 10.0
+metadata/_custom_type_script = "uid://bpxp3eagmtv8s"
+
+[node name="SelectionVisual" type="Node2D" parent="RTSSelectionSystem"]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="RTSSelectionSystem/SelectionVisual"]
+modulate = Color(0.27058825, 1, 1, 0.5019608)
+position = Vector2(5, 5)
+texture = ExtResource("6_oflq4")
+
+[node name="RTSOrderSystem" type="Node2D" parent="." node_paths=PackedStringArray("_selectionSystem", "_orderShapeCast")]
+script = ExtResource("5_ok8j6")
+_selectionSystem = NodePath("../RTSSelectionSystem")
+_orderShapeCast = NodePath("ShapeCast2D")
+metadata/_custom_type_script = "uid://8mmemjm8fgo6"
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="RTSOrderSystem"]
+position = Vector2(-25, 200)
+shape = SubResource("CircleShape2D_oflq4")
+target_position = Vector2(0, 0)
+collision_mask = 3
+collide_with_areas = true
+
+[node name="Tree" type="RigidBody2D" parent="." node_paths=PackedStringArray("_entitySizeCollisionShape")]
+position = Vector2(185, -74)
+collision_layer = 2
+collision_mask = 3
+gravity_scale = 0.0
+sleeping = true
+lock_rotation = true
+freeze = true
+script = ExtResource("1_hp4hs")
+_entitySizeCollisionShape = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://0a7lk2750m1d"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tree"]
+shape = SubResource("CircleShape2D_awap8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Tree"]
+self_modulate = Color(0.35859713, 0.21510413, 0.029247662, 1)
+texture = ExtResource("6_oflq4")
+
+[node name="TreeComponent" type="Node2D" parent="Tree"]
+script = ExtResource("6_awap8")
+metadata/_custom_type_script = "uid://cj5gmash67mt2"
+
+[node name="Entity3" parent="." instance=ExtResource("1_ok8j6")]
+position = Vector2(-185, 50)
+
+[node name="Entity4" parent="." instance=ExtResource("1_ok8j6")]
+position = Vector2(152, 43)
+
+[node name="Entity5" parent="." instance=ExtResource("1_ok8j6")]
+position = Vector2(-89, 102)

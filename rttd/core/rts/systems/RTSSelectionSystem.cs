@@ -1,0 +1,90 @@
+using System.Collections.Generic;
+using System.Text;
+using Godot;
+
+namespace RTTD;
+
+[GlobalClass]
+public partial class RTSSelectionSystem : Node2D
+{
+    public IReadOnlyList<UnitComponent> Selected => _selected;
+    
+    private Rect2 _selectionRect;
+    private bool _selecting;
+    private readonly List<UnitComponent> _selected = new();
+
+    [Export] private Node2D _selectionVisual;
+    [Export] private float _selectionVisualBaseSize = 64f;
+
+    public override void _EnterTree()
+    {
+        base._EnterTree();
+        _selectionVisual.Visible = false;
+    }
+
+    public override void _Input(InputEvent @event)
+    {
+        base._Input(@event);
+
+        if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left } mouseButton)
+        {
+            if (mouseButton.Pressed)
+            {
+                _selecting = true;
+                _selectionRect.Position = GetGlobalMousePosition();
+                _selectionRect.Size = Vector2.Zero;
+                _selectionVisual.Visible = true;
+                
+                GetViewport().SetInputAsHandled();
+            }
+            else
+            {
+                _selecting = false;
+                _selectionRect.End = GetGlobalMousePosition();
+                UpdateSelectedList();
+                _selectionVisual.Visible = false;
+
+                GetViewport().SetInputAsHandled();
+                
+                StringBuilder sb = new StringBuilder();
+                sb.Append($"Selected ({_selected.Count}): ");
+                foreach (UnitComponent rtsEntityComponent in _selected)
+                {
+                    sb.Append(rtsEntityComponent.GetEntityOwner().Name);
+                    sb.Append(", ");
+                }
+                GD.Print(sb.ToString());
+            }
+        }
+        else if (@event is InputEventMouseMotion && _selecting)
+        {
+            _selectionRect.End = GetGlobalMousePosition();
+            UpdateSelectedList();
+            
+            GetViewport().SetInputAsHandled();
+        }
+    }
+
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+
+        if (_selecting)
+        {
+            _selectionVisual.GlobalPosition = _selectionRect.Position;
+            _selectionVisual.Scale = _selectionRect.Size / _selectionVisualBaseSize;
+        }
+    }
+
+    private void UpdateSelectedList()
+    {
+        _selected.Clear();
+        foreach (UnitComponent entityComponent in UnitComponent.AllUnits)
+        {
+            if (_selectionRect.Abs().HasPoint(entityComponent.GlobalPosition))
+            {
+                _selected.Add(entityComponent);
+            }
+        }
+    }
+}
