@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="ResourcesData" load_steps=3 format=3 uid="uid://bdbv1l478ad4q"]
+
+[ext_resource type="Script" uid="uid://clmhgw5gtmef0" path="res://rttd/core/resources/ResourceType.cs" id="1_qujbl"]
+[ext_resource type="Script" uid="uid://cpvnvrmwdt6lm" path="res://rttd/core/resources/ResourcesData.cs" id="2_x4cdd"]
+
+[resource]
+resource_name = "PlayerResourcesData"
+script = ExtResource("2_x4cdd")
+metadata/_custom_type_script = "uid://cpvnvrmwdt6lm"

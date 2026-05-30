@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ResourceType" load_steps=3 format=3 uid="uid://ygo1o6lxhgre"]
+
+[ext_resource type="Script" uid="uid://clmhgw5gtmef0" path="res://rttd/core/resources/ResourceType.cs" id="1_mllnk"]
+[ext_resource type="Texture2D" uid="uid://dl4qe57ka51b" path="res://pixel.png" id="1_vyeiy"]
+
+[resource]
+script = ExtResource("1_mllnk")
+Name = "Wood"
+Description = "da wood"
+Texture = ExtResource("1_vyeiy")
+ModuloColor = Color(0.30980393, 0.16470589, 0.02745098, 1)
+metadata/_custom_type_script = "uid://clmhgw5gtmef0"

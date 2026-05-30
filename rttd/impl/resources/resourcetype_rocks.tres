@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ResourceType" load_steps=3 format=3 uid="uid://b3gw2ko5x7inp"]
+
+[ext_resource type="Texture2D" uid="uid://dl4qe57ka51b" path="res://pixel.png" id="1_ohnvk"]
+[ext_resource type="Script" uid="uid://clmhgw5gtmef0" path="res://rttd/core/resources/ResourceType.cs" id="2_gjsxu"]
+
+[resource]
+script = ExtResource("2_gjsxu")
+Name = "Rocks"
+Description = "cailloux"
+Texture = ExtResource("1_ohnvk")
+ModuloColor = Color(0.51, 0.51, 0.51, 1)
+metadata/_custom_type_script = "uid://clmhgw5gtmef0"
