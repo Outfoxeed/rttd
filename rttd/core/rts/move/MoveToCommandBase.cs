@@ -34,7 +34,7 @@ public abstract class MoveToCommandBase : UnitCommand
     protected override void ProcessImpl()
     {
         ulong time = Time.GetTicksMsec();
-        if (_lastUpdateTime + UpdateIntervalInMilliseconds > time)
+        if (time >= _lastUpdateTime + UpdateIntervalInMilliseconds)
         {
             UpdateVelocity();
             _lastUpdateTime = time;
