@@ -30,14 +30,27 @@ public partial class RTSSelectionSystem : Node2D
         {
             if (mouseButton.Pressed)
             {
-                _selecting = true;
-                _selectionRect.Position = GetGlobalMousePosition();
-                _selectionRect.Size = Vector2.Zero;
-                _selectionVisual.Visible = true;
+                _selectionRect = new Rect2(GetGlobalMousePosition(), Vector2.Zero).Grow(8);
+                UpdateSelectedList();
+                if (_selected.Count > 0)
+                {
+                    while (_selected.Count > 1)
+                    {
+                        _selected.RemoveAt(_selected.Count - 1);
+                    }
+                    PrintSelectedUnits();
+                }
+                else
+                {
+                    _selecting = true;
+                    _selectionRect.Position = GetGlobalMousePosition();
+                    _selectionRect.Size = Vector2.Zero;
+                    _selectionVisual.Visible = true;
+                }
                 
                 GetViewport().SetInputAsHandled();
             }
-            else
+            else if (_selecting)
             {
                 _selecting = false;
                 _selectionRect.End = GetGlobalMousePosition();
@@ -45,15 +58,7 @@ public partial class RTSSelectionSystem : Node2D
                 _selectionVisual.Visible = false;
 
                 GetViewport().SetInputAsHandled();
-                
-                StringBuilder sb = new StringBuilder();
-                sb.Append($"Selected ({_selected.Count}): ");
-                foreach (UnitComponent rtsEntityComponent in _selected)
-                {
-                    sb.Append(rtsEntityComponent.GetEntityOwner().Name);
-                    sb.Append(", ");
-                }
-                GD.Print(sb.ToString());
+                PrintSelectedUnits();
             }
         }
         else if (@event is InputEventMouseMotion && _selecting)
@@ -63,6 +68,18 @@ public partial class RTSSelectionSystem : Node2D
             
             GetViewport().SetInputAsHandled();
         }
+    }
+
+    private void PrintSelectedUnits()
+    {
+        StringBuilder sb = new StringBuilder();
+        sb.Append($"Selected ({_selected.Count}): ");
+        foreach (UnitComponent rtsEntityComponent in _selected)
+        {
+            sb.Append(rtsEntityComponent.GetEntityOwner().Name);
+            sb.Append(", ");
+        }
+        GD.Print(sb.ToString());
     }
 
     public override void _Process(double delta)
@@ -81,7 +98,7 @@ public partial class RTSSelectionSystem : Node2D
         _selected.Clear();
         foreach (UnitComponent entityComponent in UnitComponent.AllUnits)
         {
-            if (_selectionRect.Abs().HasPoint(entityComponent.GlobalPosition))
+            if (_selectionRect.Abs().Intersects(entityComponent.GetEntityOwner().GetWorldRect()))
             {
                 _selected.Add(entityComponent);
             }
