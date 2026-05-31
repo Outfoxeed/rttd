@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="ResourceType" load_steps=3 format=3 uid="uid://dwl5kbpnggqqa"]
+
+[ext_resource type="Texture2D" uid="uid://dl4qe57ka51b" path="res://pixel.png" id="1_8o5rt"]
+[ext_resource type="Script" uid="uid://clmhgw5gtmef0" path="res://rttd/core/resources/ResourceType.cs" id="2_feowb"]
+
+[resource]
+script = ExtResource("2_feowb")
+Name = "Mana"
+Texture = ExtResource("1_8o5rt")
+ModuloColor = Color(0, 0.617136, 0.92060417, 1)
+metadata/_custom_type_script = "uid://clmhgw5gtmef0"
