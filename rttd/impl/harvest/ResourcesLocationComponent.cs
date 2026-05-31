@@ -18,13 +18,13 @@ public partial class ResourcesLocationComponent : UnitVisitorComponent
     
     public override bool CanVisit(UnitComponent unitComponent)
     {
-        return Amount > 0 && unitComponent.GetEntityOwner().HasComponent<HarvesterComponent>();
+        return Amount > 0 && unitComponent.GetEntity().HasComponent<HarvesterComponent>();
     }
 
     protected override bool TryVisitImpl(UnitComponent target)
     {
         target.ReplaceCurrentCommand(new CompositeUnitCommand([
-            new MoveToEntityCommand(GetEntityOwner()),
+            new MoveToEntityCommand(GetEntity()),
             new HarvestCommand(this)
         ]));
         return true;

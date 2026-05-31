@@ -18,7 +18,7 @@ public abstract class MoveToCommandBase : UnitCommand
 
     protected override Task RunAsyncImpl()
     {
-        _moveToComponent = GetUnit().GetEntityOwner().GetComponent<MoveToComponent>();
+        _moveToComponent = GetEntity().GetComponent<MoveToComponent>();
         
         UpdateVelocity();
         _lastUpdateTime = Time.GetTicksMsec();
@@ -27,7 +27,7 @@ public abstract class MoveToCommandBase : UnitCommand
 
     protected override Task CancelAsyncImpl()
     {
-        GetUnit().GetEntityOwner().LinearVelocity = Vector2.Zero;
+        GetEntity().LinearVelocity = Vector2.Zero;
         return Task.CompletedTask;
     }
 

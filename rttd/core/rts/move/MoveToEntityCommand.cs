@@ -14,14 +14,14 @@ public class MoveToEntityCommand : MoveToCommandBase
 
     protected override void UpdateVelocity()
     {
-        if (_targetEntity.GetWorldRect().Grow(SuccessDistanceThreshold).HasPoint(GetUnit().GetEntityOwner().GlobalPosition))
+        if (_targetEntity.GetWorldRect().Grow(SuccessDistanceThreshold).HasPoint(GetEntity().GlobalPosition))
         {
             SetState(UnitCommandState.Success);
-            GetUnit().GetEntityOwner().LinearVelocity = Vector2.Zero;
+            GetEntity().LinearVelocity = Vector2.Zero;
         }
         else
         {
-            GetUnit().GetEntityOwner().LinearVelocity = (_targetEntity.GlobalPosition - GetUnit().GetEntityOwner().GlobalPosition).Normalized() * _moveToComponent.Speed;
+            GetEntity().LinearVelocity = (_targetEntity.GlobalPosition - GetEntity().GlobalPosition).Normalized() * _moveToComponent.Speed;
         }
     }
 }

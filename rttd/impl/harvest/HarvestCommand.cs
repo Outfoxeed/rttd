@@ -17,9 +17,9 @@ public class HarvestCommand : UnitCommand
 
     protected override Task RunAsyncImpl()
     {
-        _harvester = GetUnit().GetEntityOwner().GetComponent<HarvesterComponent>();
+        _harvester = GetEntity().GetComponent<HarvesterComponent>();
         _lastHarvestTime = Time.GetTicksMsec();
-        GetUnit().GetEntityOwner().LinearVelocity = Vector2.Zero;
+        GetEntity().LinearVelocity = Vector2.Zero;
         
         return Task.CompletedTask;
     }

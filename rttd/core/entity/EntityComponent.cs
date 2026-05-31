@@ -5,17 +5,12 @@ namespace RTTD;
 [GlobalClass]
 public partial class EntityComponent : Node2D, IEntityComponent
 {
-    private Entity _entityOwner;
+    private Entity _entity;
 
-    public EntityComponent()
+    public Entity GetEntity()
     {
-        SetName(GetType().Name);
-    }
-
-    public Entity GetEntityOwner()
-    {
-        if (_entityOwner == null)
-            _entityOwner = GetParent<Entity>();
-        return _entityOwner;
+        if (_entity == null)
+            _entity = GetParent<Entity>();
+        return _entity;
     }
 }

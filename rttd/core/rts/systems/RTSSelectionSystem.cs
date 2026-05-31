@@ -76,7 +76,7 @@ public partial class RTSSelectionSystem : Node2D
         sb.Append($"Selected ({_selected.Count}): ");
         foreach (UnitComponent rtsEntityComponent in _selected)
         {
-            sb.Append(rtsEntityComponent.GetEntityOwner().Name);
+            sb.Append(rtsEntityComponent.GetEntity().Name);
             sb.Append(", ");
         }
         GD.Print(sb.ToString());
@@ -98,7 +98,7 @@ public partial class RTSSelectionSystem : Node2D
         _selected.Clear();
         foreach (UnitComponent entityComponent in UnitComponent.AllUnits)
         {
-            if (_selectionRect.Abs().Intersects(entityComponent.GetEntityOwner().GetWorldRect()))
+            if (_selectionRect.Abs().Intersects(entityComponent.GetEntity().GetWorldRect()))
             {
                 _selected.Add(entityComponent);
             }

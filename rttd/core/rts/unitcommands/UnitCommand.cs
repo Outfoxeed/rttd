@@ -81,6 +81,7 @@ public abstract class UnitCommand : IUnitCommand
     }
     protected abstract void ProcessImpl();
 
+    protected Entity GetEntity() => GetUnit().GetEntity();
     public UnitComponent GetUnit() => _unit;
     public void SetUnit(UnitComponent unit) => _unit = unit;
     public UnitCommandState GetState() => _state;
@@ -102,6 +103,6 @@ public abstract class UnitCommand : IUnitCommand
 
     public override string ToString()
     {
-        return $"{GetType().Name}({_unit.GetEntityOwner()}|{GetState()})";
+        return $"{GetType().Name}({_unit.GetEntity()}|{GetState()})";
     }
 }

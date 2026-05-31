@@ -17,7 +17,7 @@ public partial class RTSOrderSystem
         {
             foreach (UnitComponent unit in units)
             {
-                if (unit.GetEntityOwner().TryGetComponent(out MoveToComponent moveToComponent))
+                if (unit.GetEntity().TryGetComponent(out MoveToComponent moveToComponent))
                 {
                     Vector2 unitTargetPosition = targetPosition + Random.GetRandomPointInCircle(units.Count * 16);
                     unit.ReplaceCurrentCommand(new MoveToPositionCommand(unitTargetPosition));
