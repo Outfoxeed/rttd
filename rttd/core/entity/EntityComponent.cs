@@ -3,7 +3,7 @@ using Godot;
 namespace RTTD;
 
 [GlobalClass]
-public partial class EntityComponent : Node2D
+public partial class EntityComponent : Node2D, IEntityComponent
 {
     private Entity _entityOwner;
 

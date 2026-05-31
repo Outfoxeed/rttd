@@ -1,13 +1,13 @@
 using Godot;
-using Godot.Collections;
 
 namespace RTTD;
 
 [GlobalClass]
-public partial class Entity : RigidBody2D
+public partial class Entity : RigidBody2D, IEntityComponentsContainer
 {
     public uint ID { get; } = Random.GetRandomUInt();
     [Export] private CollisionShape2D _entitySizeCollisionShape;
+    private EntityComponentsContainer _componentsContainer;
 
     public override void _EnterTree()
     {
@@ -19,41 +19,8 @@ public partial class Entity : RigidBody2D
         {
             SetName(new StringName(stringName + stringID));
         }
-    }
 
-    // TODO: to improve
-    public bool TryGetComponent<T>(out T component) where T : EntityComponent
-    {
-        var children = GetChildren();
-        for (var i = 0; i < children.Count; i++)
-        {
-            if (children[i] is T wantedComponent)
-            {
-                component = wantedComponent;
-                return true;
-            }
-        }
-
-        component = null;
-        return false;
-    }
-    
-    // TODO: to improve
-    public bool HasComponent<T>() where T : EntityComponent
-    {
-        Array<Node> children = GetChildren();
-        for (var i = 0; i < children.Count; i++)
-        {
-            if (children[i] is T)
-                return true;
-        }
-
-        return false;
-    }
-
-    public T GetComponent<T>() where T : EntityComponent
-    {
-        return GetNode<T>(typeof(T).Name);
+        _componentsContainer ??= new EntityComponentsContainer(this);
     }
 
     public Rect2 GetWorldRect()
@@ -68,4 +35,13 @@ public partial class Entity : RigidBody2D
 
         return new Rect2(GlobalPosition, Vector2.Zero).Grow(16);
     }
+
+    public void AddComponent<T>(T component) where T : IEntityComponent => _componentsContainer.AddComponent(component);
+    public void RemoveComponent<T>(T component) where T : IEntityComponent => _componentsContainer.RemoveComponent(component);
+    public void RemoveAllComponents<T>() where T : IEntityComponent => _componentsContainer.RemoveAllComponents<T>();
+    public bool HasComponent<T>() where T : IEntityComponent => _componentsContainer.HasComponent<T>();
+    public bool TryGetComponent<T>(out T component) where T : IEntityComponent => _componentsContainer.TryGetComponent(out component);
+    public T GetComponent<T>() where T : IEntityComponent => _componentsContainer.GetComponent<T>();
+    public bool TryGetAllComponents<T>(out T[] components) where T : IEntityComponent => _componentsContainer.TryGetAllComponents(out components);
+    public T[] GetAllComponents<T>() where T : IEntityComponent => _componentsContainer.GetAllComponents<T>();
 } 
