@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cm12x6kvm6tx6"]
+[gd_scene load_steps=17 format=3 uid="uid://cm12x6kvm6tx6"]
 
 [ext_resource type="Script" uid="uid://0a7lk2750m1d" path="res://rttd/core/entity/Entity.cs" id="1_hp4hs"]
 [ext_resource type="PackedScene" uid="uid://m8w3vj7rvvx7" path="res://rttd/core/entity/unit_entity.tscn" id="1_ok8j6"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://be27wkwhs3a54" path="res://rttd/core/rts/move/MoveToComponent.cs" id="9_vpvrv"]
 [ext_resource type="Script" uid="uid://cqqgr32ch7rdf" path="res://rttd/impl/harvest/HarvesterComponent.cs" id="10_bukp4"]
 [ext_resource type="Resource" uid="uid://bdbv1l478ad4q" path="res://rttd/core/resources/playerresourcesdata.tres" id="12_bukp4"]
+[ext_resource type="PackedScene" uid="uid://ja8nj0pq4rrn" path="res://rttd/ui/hud.tscn" id="13_gch3o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oflq4"]
 
@@ -122,3 +123,6 @@ shape = SubResource("CircleShape2D_ok8j6")
 script = ExtResource("7_awap8")
 Resources = ExtResource("12_bukp4")
 metadata/_custom_type_script = "uid://ta15j38pkjt"
+
+[node name="HUD" parent="." instance=ExtResource("13_gch3o")]
+follow_viewport_enabled = false

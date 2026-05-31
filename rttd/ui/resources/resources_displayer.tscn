@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://c64t2l8wt770a"]
+
+[ext_resource type="Script" uid="uid://dkrwhoqxar5u8" path="res://rttd/ui/resources/ResourcesDisplayer.cs" id="1_inb4a"]
+[ext_resource type="Texture2D" uid="uid://dl4qe57ka51b" path="res://pixel.png" id="2_bytsx"]
+
+[node name="ResourcesDisplayer" type="Control" node_paths=PackedStringArray("_textureRect", "_label")]
+custom_minimum_size = Vector2(200, 32)
+layout_mode = 3
+anchors_preset = 0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+script = ExtResource("1_inb4a")
+_textureRect = NodePath("HBoxContainer/TextureRect")
+_label = NodePath("HBoxContainer/Label")
+metadata/_custom_type_script = "uid://dkrwhoqxar5u8"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_bytsx")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "#ResourceAmount"

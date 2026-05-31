@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ja8nj0pq4rrn"]
+
+[ext_resource type="PackedScene" uid="uid://cc0o5k5er0p3c" path="res://rttd/ui/resources/resources_data_displayer.tscn" id="1_jtitl"]
+
+[node name="HUD" type="CanvasLayer"]
+
+[node name="ResourcesDataDisplayer" parent="." instance=ExtResource("1_jtitl")]

@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://cc0o5k5er0p3c"]
+
+[ext_resource type="Script" uid="uid://0cmxioheikhp" path="res://rttd/ui/resources/ResourcesDataDisplayer.cs" id="1_sit5j"]
+[ext_resource type="Resource" uid="uid://bdbv1l478ad4q" path="res://rttd/core/resources/playerresourcesdata.tres" id="2_hseqk"]
+[ext_resource type="PackedScene" uid="uid://c64t2l8wt770a" path="res://rttd/ui/resources/resources_displayer.tscn" id="3_c12b2"]
+
+[node name="ResourcesDataDisplayer" type="Control" node_paths=PackedStringArray("_resourcesDisplayerContainer")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sit5j")
+_resources = ExtResource("2_hseqk")
+_resourcesDisplayerPackedScene = ExtResource("3_c12b2")
+_resourcesDisplayerContainer = NodePath("HBoxContainer")
+metadata/_custom_type_script = "uid://0cmxioheikhp"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(0, 96)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 8.0
+offset_top = 8.0
+offset_right = -8.0
+offset_bottom = 104.0
+grow_horizontal = 2
