@@ -38,7 +38,7 @@ public class HarvestCommand : UnitCommand
         }
         
         ulong time = Time.GetTicksMsec();
-        ulong nextHarvestTime = _lastHarvestTime + (ulong)(_location.HarvestIntervalInMilliseconds / _harvester.SpeedFactor);
+        ulong nextHarvestTime = _lastHarvestTime + (ulong)(_location.HarvestIntervalInMilliseconds / _harvester.GetSpeedFactor(_location.ResourceType));
         if (time >= nextHarvestTime)
         {
             PlayerResourcesManager.Instance.Resources.AddResources(_location.ResourceType, Mathf.Min(_location.AmountPerHarvest, _location.Amount));

@@ -18,7 +18,8 @@ public partial class ResourcesLocationComponent : UnitVisitorComponent
     
     public override bool CanVisit(UnitComponent unitComponent)
     {
-        return Amount > 0 && unitComponent.GetEntity().HasComponent<HarvesterComponent>();
+        return Amount > 0 && unitComponent.GetEntity().TryGetComponent(out HarvesterComponent harvesterComponent) 
+                          && harvesterComponent.CanHarvest(ResourceType);
     }
 
     protected override bool TryVisitImpl(UnitComponent target)
