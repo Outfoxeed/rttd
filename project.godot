@@ -12,7 +12,7 @@ config_version=5
 
 config/name="RTTD"
 run/main_scene="uid://cm12x6kvm6tx6"
-config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 config/icon="res://icon.svg"
 
 [display]
