@@ -47,8 +47,6 @@ public partial class RTSSelectionSystem : Node2D
                     _selectionRect.Size = Vector2.Zero;
                     _selectionVisual.Visible = true;
                 }
-                
-                GetViewport().SetInputAsHandled();
             }
             else if (_selecting)
             {

@@ -1,7 +1,7 @@
-[gd_scene load_steps=17 format=3 uid="uid://cm12x6kvm6tx6"]
+[gd_scene format=3 uid="uid://cm12x6kvm6tx6"]
 
 [ext_resource type="Script" uid="uid://0a7lk2750m1d" path="res://rttd/core/entity/Entity.cs" id="1_hp4hs"]
-[ext_resource type="PackedScene" uid="uid://m8w3vj7rvvx7" path="res://rttd/core/entity/unit_entity.tscn" id="1_ok8j6"]
+[ext_resource type="PackedScene" uid="uid://m8w3vj7rvvx7" path="res://rttd/impl/entities/unit_default.tscn" id="1_ok8j6"]
 [ext_resource type="PackedScene" uid="uid://cxhwgsf78o3vy" path="res://rttd/core/rts/units/scene_unitcomponent.tscn" id="2_hp4hs"]
 [ext_resource type="Script" uid="uid://bpxp3eagmtv8s" path="res://rttd/core/rts/systems/RTSSelectionSystem.cs" id="4_ik0d0"]
 [ext_resource type="Script" uid="uid://8mmemjm8fgo6" path="res://rttd/core/rts/systems/RTSOrderSystem.cs" id="5_ok8j6"]
@@ -11,7 +11,10 @@
 [ext_resource type="Resource" uid="uid://ygo1o6lxhgre" path="res://rttd/impl/resources/resourcetype_wood.tres" id="7_j5sld"]
 [ext_resource type="Script" uid="uid://be27wkwhs3a54" path="res://rttd/core/rts/move/MoveToComponent.cs" id="9_vpvrv"]
 [ext_resource type="Script" uid="uid://cqqgr32ch7rdf" path="res://rttd/impl/harvest/HarvesterComponent.cs" id="10_bukp4"]
+[ext_resource type="Script" uid="uid://clmhgw5gtmef0" path="res://rttd/core/resources/ResourceType.cs" id="11_awgja"]
+[ext_resource type="Script" uid="uid://dwi4oe3jkn31c" path="res://rttd/core/ui/WindowOpenerComponent.cs" id="12_06c4b"]
 [ext_resource type="Resource" uid="uid://bdbv1l478ad4q" path="res://rttd/core/resources/playerresourcesdata.tres" id="12_bukp4"]
+[ext_resource type="PackedScene" uid="uid://bxxuucvuksx8u" path="res://rttd/core/ui/scene_windowbase.tscn" id="13_8ip8q"]
 [ext_resource type="PackedScene" uid="uid://ja8nj0pq4rrn" path="res://rttd/ui/hud.tscn" id="13_gch3o"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oflq4"]
@@ -22,43 +25,38 @@ radius = 7.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ok8j6"]
 radius = 8.0
 
-[node name="World" type="Node2D"]
+[node name="World" type="Node2D" unique_id=1133057806]
 
-[node name="Entity" parent="." instance=ExtResource("1_ok8j6")]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=38065880]
 
-[node name="Entity2" parent="." instance=ExtResource("1_ok8j6")]
-position = Vector2(-156, -31)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="RTSSelectionSystem" type="Node2D" parent="." node_paths=PackedStringArray("_selectionVisual")]
+[node name="RTSSelectionSystem" type="Node2D" parent="." unique_id=1507630739 node_paths=PackedStringArray("_selectionVisual")]
 script = ExtResource("4_ik0d0")
 _selectionVisual = NodePath("SelectionVisual")
 _selectionVisualBaseSize = 10.0
 metadata/_custom_type_script = "uid://bpxp3eagmtv8s"
 
-[node name="SelectionVisual" type="Node2D" parent="RTSSelectionSystem"]
+[node name="SelectionVisual" type="Node2D" parent="RTSSelectionSystem" unique_id=1883393200]
 visible = false
 
-[node name="Sprite2D" type="Sprite2D" parent="RTSSelectionSystem/SelectionVisual"]
+[node name="Sprite2D" type="Sprite2D" parent="RTSSelectionSystem/SelectionVisual" unique_id=1348264123]
 modulate = Color(0.27058825, 1, 1, 0.5019608)
 position = Vector2(5, 5)
 texture = ExtResource("6_oflq4")
 
-[node name="RTSOrderSystem" type="Node2D" parent="." node_paths=PackedStringArray("_selectionSystem", "_orderShapeCast")]
+[node name="RTSOrderSystem" type="Node2D" parent="." unique_id=773101422 node_paths=PackedStringArray("_selectionSystem", "_orderShapeCast")]
 script = ExtResource("5_ok8j6")
 _selectionSystem = NodePath("../RTSSelectionSystem")
 _orderShapeCast = NodePath("ShapeCast2D")
 metadata/_custom_type_script = "uid://8mmemjm8fgo6"
 
-[node name="ShapeCast2D" type="ShapeCast2D" parent="RTSOrderSystem"]
+[node name="ShapeCast2D" type="ShapeCast2D" parent="RTSOrderSystem" unique_id=897262136]
 position = Vector2(-25, 200)
 shape = SubResource("CircleShape2D_oflq4")
 target_position = Vector2(0, 0)
 collision_mask = 3
 collide_with_areas = true
 
-[node name="Tree" type="RigidBody2D" parent="." node_paths=PackedStringArray("_entitySizeCollisionShape")]
+[node name="Tree" type="RigidBody2D" parent="." unique_id=834391834 node_paths=PackedStringArray("_entitySizeCollisionShape")]
 position = Vector2(185, -74)
 collision_layer = 2
 collision_mask = 3
@@ -70,28 +68,33 @@ script = ExtResource("1_hp4hs")
 _entitySizeCollisionShape = NodePath("CollisionShape2D")
 metadata/_custom_type_script = "uid://0a7lk2750m1d"
 
-[node name="ResourcesLocationComponent" type="Node2D" parent="Tree"]
+[node name="ResourcesLocationComponent" type="Node2D" parent="Tree" unique_id=667101006]
 script = ExtResource("6_by4bd")
 ResourceType = ExtResource("7_j5sld")
 metadata/_custom_type_script = "uid://b18x8cxo4rieg"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Tree"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Tree" unique_id=1232157903]
 shape = SubResource("CircleShape2D_awap8")
 
-[node name="Sprite2D" type="Sprite2D" parent="Tree"]
+[node name="Sprite2D" type="Sprite2D" parent="Tree" unique_id=813323219]
 self_modulate = Color(0.35859713, 0.21510413, 0.029247662, 1)
 texture = ExtResource("6_oflq4")
 
-[node name="Entity3" parent="." instance=ExtResource("1_ok8j6")]
+[node name="Entity" parent="." unique_id=920622866 instance=ExtResource("1_ok8j6")]
+
+[node name="Entity2" parent="." unique_id=542945560 instance=ExtResource("1_ok8j6")]
+position = Vector2(-156, -31)
+
+[node name="Entity3" parent="." unique_id=2435223 instance=ExtResource("1_ok8j6")]
 position = Vector2(-185, 50)
 
-[node name="Entity4" parent="." instance=ExtResource("1_ok8j6")]
+[node name="Entity4" parent="." unique_id=1895256882 instance=ExtResource("1_ok8j6")]
 position = Vector2(152, 43)
 
-[node name="Entity5" parent="." instance=ExtResource("1_ok8j6")]
-position = Vector2(-89, 102)
+[node name="Entity5" parent="." unique_id=1728532513 instance=ExtResource("1_ok8j6")]
+position = Vector2(-89, 103)
 
-[node name="HarvesterEntity" type="RigidBody2D" parent="." node_paths=PackedStringArray("_entitySizeCollisionShape")]
+[node name="HarvesterEntity" type="RigidBody2D" parent="." unique_id=480625405 node_paths=PackedStringArray("_entitySizeCollisionShape")]
 position = Vector2(-1, 116)
 collision_mask = 2
 mass = 0.001
@@ -101,28 +104,54 @@ script = ExtResource("1_hp4hs")
 _entitySizeCollisionShape = NodePath("CollisionShape2D")
 metadata/_custom_type_script = "uid://0a7lk2750m1d"
 
-[node name="UnitComponent" parent="HarvesterEntity" instance=ExtResource("2_hp4hs")]
+[node name="UnitComponent" parent="HarvesterEntity" unique_id=1109922789 instance=ExtResource("2_hp4hs")]
 
-[node name="MoveToComponent" type="Node2D" parent="HarvesterEntity"]
+[node name="MoveToComponent" type="Node2D" parent="HarvesterEntity" unique_id=1862455570]
 script = ExtResource("9_vpvrv")
 metadata/_custom_type_script = "uid://be27wkwhs3a54"
 
-[node name="HarvesterComponent" type="Node2D" parent="HarvesterEntity"]
+[node name="HarvesterComponent" type="Node2D" parent="HarvesterEntity" unique_id=1515777766]
 script = ExtResource("10_bukp4")
+_speedFactors = Dictionary[ExtResource("11_awgja"), float]({
+ExtResource("7_j5sld"): 5.0
+})
 metadata/_custom_type_script = "uid://cqqgr32ch7rdf"
 
-[node name="Sprite2D" type="Sprite2D" parent="HarvesterEntity"]
+[node name="Sprite2D" type="Sprite2D" parent="HarvesterEntity" unique_id=757375887]
 self_modulate = Color(0.16862746, 0.76862746, 0, 1)
 scale = Vector2(1.6, 1.6)
 texture = ExtResource("6_oflq4")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="HarvesterEntity"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HarvesterEntity" unique_id=448849592]
 shape = SubResource("CircleShape2D_ok8j6")
 
-[node name="PlayerResourcesManager" type="Node" parent="."]
+[node name="WindowOpenerTestEntity" type="RigidBody2D" parent="." unique_id=1095856552 node_paths=PackedStringArray("_entitySizeCollisionShape")]
+position = Vector2(123, 166)
+collision_layer = 2
+input_pickable = true
+mass = 0.001
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_hp4hs")
+_entitySizeCollisionShape = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://0a7lk2750m1d"
+
+[node name="WindowOpenerComponent" type="Node2D" parent="WindowOpenerTestEntity" unique_id=871814681]
+script = ExtResource("12_06c4b")
+_windowPackedScene = ExtResource("13_8ip8q")
+metadata/_custom_type_script = "uid://dwi4oe3jkn31c"
+
+[node name="Sprite2D" type="Sprite2D" parent="WindowOpenerTestEntity" unique_id=230422843]
+self_modulate = Color(0.737207, 0.5065969, 1, 1)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("6_oflq4")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WindowOpenerTestEntity" unique_id=912049968]
+shape = SubResource("CircleShape2D_ok8j6")
+
+[node name="PlayerResourcesManager" type="Node" parent="." unique_id=1466143642]
 script = ExtResource("7_awap8")
 Resources = ExtResource("12_bukp4")
 metadata/_custom_type_script = "uid://ta15j38pkjt"
 
-[node name="HUD" parent="." instance=ExtResource("13_gch3o")]
-follow_viewport_enabled = false
+[node name="HUD" parent="." unique_id=114632112 instance=ExtResource("13_gch3o")]

@@ -1,7 +1,23 @@
-[gd_scene load_steps=2 format=3 uid="uid://ja8nj0pq4rrn"]
+[gd_scene format=3 uid="uid://ja8nj0pq4rrn"]
 
 [ext_resource type="PackedScene" uid="uid://cc0o5k5er0p3c" path="res://rttd/ui/resources/resources_data_displayer.tscn" id="1_jtitl"]
+[ext_resource type="Script" uid="uid://i01erertu5xj" path="res://rttd/core/ui/UIManager.cs" id="2_ir78m"]
 
-[node name="HUD" type="CanvasLayer"]
+[node name="HUD" type="CanvasLayer" unique_id=1911922012]
 
-[node name="ResourcesDataDisplayer" parent="." instance=ExtResource("1_jtitl")]
+[node name="UIManager" type="Node" parent="." unique_id=254304226 node_paths=PackedStringArray("_windowsContainer")]
+script = ExtResource("2_ir78m")
+_windowsContainer = NodePath("../Windows")
+metadata/_custom_type_script = "uid://i01erertu5xj"
+
+[node name="ResourcesDataDisplayer" parent="." unique_id=43911624 instance=ExtResource("1_jtitl")]
+mouse_filter = 2
+
+[node name="Windows" type="Control" parent="." unique_id=2037321835]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
