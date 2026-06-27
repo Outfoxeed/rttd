@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dfbiiwa75qxn4"]
 
-[ext_resource type="PackedScene" uid="uid://m8w3vj7rvvx7" path="res://rttd/impl/entities/unit_default.tscn" id="1_opp3o"]
+[ext_resource type="PackedScene" uid="uid://m8w3vj7rvvx7" path="res://rttd/impl/entities/unit_base.tscn" id="1_opp3o"]
 [ext_resource type="Script" uid="uid://cqqgr32ch7rdf" path="res://rttd/impl/harvest/HarvesterComponent.cs" id="2_qajql"]
 [ext_resource type="Script" uid="uid://clmhgw5gtmef0" path="res://rttd/core/resources/ResourceType.cs" id="3_bthms"]
 [ext_resource type="Resource" uid="uid://ygo1o6lxhgre" path="res://rttd/impl/resources/resourcetype_wood.tres" id="4_h6my8"]

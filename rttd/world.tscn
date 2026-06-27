@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cm12x6kvm6tx6"]
 
 [ext_resource type="Script" uid="uid://0a7lk2750m1d" path="res://rttd/core/entity/Entity.cs" id="1_hp4hs"]
-[ext_resource type="PackedScene" uid="uid://m8w3vj7rvvx7" path="res://rttd/impl/entities/unit_default.tscn" id="1_ok8j6"]
+[ext_resource type="PackedScene" uid="uid://m8w3vj7rvvx7" path="res://rttd/impl/entities/unit_base.tscn" id="1_ok8j6"]
 [ext_resource type="Script" uid="uid://bpxp3eagmtv8s" path="res://rttd/core/rts/systems/RTSSelectionSystem.cs" id="4_ik0d0"]
 [ext_resource type="Script" uid="uid://8mmemjm8fgo6" path="res://rttd/core/rts/systems/RTSOrderSystem.cs" id="5_ok8j6"]
 [ext_resource type="Script" uid="uid://b18x8cxo4rieg" path="res://rttd/impl/harvest/ResourcesLocationComponent.cs" id="6_by4bd"]
