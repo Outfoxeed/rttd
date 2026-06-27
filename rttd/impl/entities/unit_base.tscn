@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://0a7lk2750m1d" path="res://rttd/core/entity/Entity.cs" id="1_0x6b2"]
 [ext_resource type="PackedScene" uid="uid://cxhwgsf78o3vy" path="res://rttd/core/rts/units/scene_unitcomponent.tscn" id="2_jpy6c"]
 [ext_resource type="Script" uid="uid://be27wkwhs3a54" path="res://rttd/core/rts/move/MoveToComponent.cs" id="3_0x6b2"]
-[ext_resource type="Texture2D" uid="uid://dl4qe57ka51b" path="res://pixel.png" id="4_p8cit"]
+[ext_resource type="Texture2D" uid="uid://b0rouc3hhjo72" path="res://circle.png" id="4_rll0t"]
 [ext_resource type="Shape2D" uid="uid://dx1fgl5rj641n" path="res://rttd/impl/entities/collisionshape_unit_medium.tres" id="5_50a5p"]
 
 [node name="UnitBase" type="RigidBody2D" unique_id=999389320 node_paths=PackedStringArray("_entitySizeCollisionShape")]
@@ -23,8 +23,9 @@ script = ExtResource("3_0x6b2")
 metadata/_custom_type_script = "uid://be27wkwhs3a54"
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=927261969]
+texture_filter = 1
 scale = Vector2(1.6, 1.6)
-texture = ExtResource("4_p8cit")
+texture = ExtResource("4_rll0t")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=174685169]
 shape = ExtResource("5_50a5p")
