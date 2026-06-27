@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cm12x6kvm6tx6"]
 
 [ext_resource type="Script" uid="uid://0a7lk2750m1d" path="res://rttd/core/entity/Entity.cs" id="1_hp4hs"]
-[ext_resource type="PackedScene" uid="uid://m8w3vj7rvvx7" path="res://rttd/impl/entities/unit_base.tscn" id="1_ok8j6"]
+[ext_resource type="PackedScene" uid="uid://de7kn86rvtw3s" path="res://rttd/impl/entities/unit_default.tscn" id="1_ok8j6"]
 [ext_resource type="Script" uid="uid://bpxp3eagmtv8s" path="res://rttd/core/rts/systems/RTSSelectionSystem.cs" id="4_ik0d0"]
 [ext_resource type="Script" uid="uid://8mmemjm8fgo6" path="res://rttd/core/rts/systems/RTSOrderSystem.cs" id="5_ok8j6"]
 [ext_resource type="Script" uid="uid://b18x8cxo4rieg" path="res://rttd/impl/harvest/ResourcesLocationComponent.cs" id="6_by4bd"]
@@ -73,20 +73,6 @@ shape = SubResource("CircleShape2D_awap8")
 self_modulate = Color(0.35859713, 0.21510413, 0.029247662, 1)
 texture = ExtResource("6_oflq4")
 
-[node name="Entity" parent="." unique_id=920622866 instance=ExtResource("1_ok8j6")]
-
-[node name="Entity2" parent="." unique_id=542945560 instance=ExtResource("1_ok8j6")]
-position = Vector2(-156, -31)
-
-[node name="Entity3" parent="." unique_id=2435223 instance=ExtResource("1_ok8j6")]
-position = Vector2(-185, 50)
-
-[node name="Entity4" parent="." unique_id=1895256882 instance=ExtResource("1_ok8j6")]
-position = Vector2(152, 43)
-
-[node name="Entity5" parent="." unique_id=1728532513 instance=ExtResource("1_ok8j6")]
-position = Vector2(-89, 103)
-
 [node name="UnitHarvester" parent="." unique_id=1340755278 instance=ExtResource("17_ubc5p")]
 position = Vector2(-80, 161)
 
@@ -99,3 +85,6 @@ Resources = ExtResource("12_bukp4")
 metadata/_custom_type_script = "uid://ta15j38pkjt"
 
 [node name="HUD" parent="." unique_id=114632112 instance=ExtResource("13_gch3o")]
+
+[node name="UnitDefault" parent="." unique_id=999389320 instance=ExtResource("1_ok8j6")]
+position = Vector2(-196, 46)

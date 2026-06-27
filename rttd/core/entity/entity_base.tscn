@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://c1eclvt58dhox"]
 
 [ext_resource type="Script" uid="uid://0a7lk2750m1d" path="res://rttd/core/entity/Entity.cs" id="1_chmeg"]
-[ext_resource type="Shape2D" uid="uid://dx1fgl5rj641n" path="res://rttd/impl/entities/collisionshape_unit.tres" id="2_dt8j5"]
+[ext_resource type="Shape2D" uid="uid://dx1fgl5rj641n" path="res://rttd/impl/entities/collisionshape_unit_medium.tres" id="2_dt8j5"]
 [ext_resource type="Texture2D" uid="uid://dl4qe57ka51b" path="res://pixel.png" id="2_v2402"]
 
 [node name="EntityBase" type="RigidBody2D" unique_id=721792293 node_paths=PackedStringArray("_entitySizeCollisionShape")]
