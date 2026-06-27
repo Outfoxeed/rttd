@@ -28,7 +28,8 @@ public partial class RTSOrderSystem : Node2D
         if (@event is InputEventMouseButton { Pressed: true, ButtonIndex: MouseButton.Right })
         {
             Vector2 globalMousePosition = GetGlobalMousePosition();
-            ApplyOrder(_selectionSystem.Selected, globalMousePosition, GetClosestEntity(globalMousePosition));
+            OrderMode orderMode = Input.IsKeyPressed(Key.Shift) ? OrderMode.Additive : OrderMode.Single; 
+            ApplyOrder(_selectionSystem.Selected, globalMousePosition, GetClosestEntity(globalMousePosition), orderMode);
 
             GetViewport().SetInputAsHandled();
         }

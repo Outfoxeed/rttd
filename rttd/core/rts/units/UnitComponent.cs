@@ -35,8 +35,7 @@ public partial class UnitComponent : EntityComponent, IUnitCommandHandler
         _commandHandler.Process();
     }
 
-    public void AddCommand(IUnitCommand command) => _commandHandler.AddCommand(command);
-    public void ReplaceCurrentCommand(IUnitCommand command) { _commandHandler.ReplaceCurrentCommand(command); }
+    public void QueueCommand(IUnitCommand command, OrderMode orderMode) =>  _commandHandler.QueueCommand(command, orderMode);
     public void ClearCommands() => _commandHandler.ClearCommands();
     public bool HasCommandInProgress() => _commandHandler.HasCommandInProgress();
 }

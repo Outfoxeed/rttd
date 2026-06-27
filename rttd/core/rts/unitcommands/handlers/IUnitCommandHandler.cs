@@ -2,8 +2,7 @@ namespace RTTD;
 
 public interface IUnitCommandHandler
 {
-    void AddCommand(IUnitCommand command);
-    void ReplaceCurrentCommand(IUnitCommand command);
+    void QueueCommand(IUnitCommand command, OrderMode orderMode);
     void ClearCommands();
 
     bool HasCommandInProgress();

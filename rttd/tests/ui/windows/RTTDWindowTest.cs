@@ -37,7 +37,7 @@ public partial class RTTDWindowTest : RTTDWindowEntityComponent
         entity.SetGlobalPosition(ownerEntity.GetGlobalPosition());
         if (entity.TryGetComponent(out UnitComponent unitComponent))
         {
-            unitComponent.AddCommand(new MoveToPositionCommand(ownerEntity.GetGlobalPosition() + Random.GetRandomPointAlongCircle(64)));
+            unitComponent.QueueCommand(new MoveToPositionCommand(ownerEntity.GetGlobalPosition() + Random.GetRandomPointAlongCircle(64)), OrderMode.Single);
         }
     }
 }

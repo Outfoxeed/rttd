@@ -3,7 +3,7 @@ using Godot;
 namespace RTTD;
 
 [GlobalClass]
-public partial class ResourcesLocationComponent : UnitVisitorComponent
+public partial class ResourcesLocationComponent : UnitOrderComponentVisitor
 {
     [Export] public ResourceType ResourceType { get; private set; }
     [Export] public int Amount { get; private set; } = 100;
@@ -15,19 +15,19 @@ public partial class ResourcesLocationComponent : UnitVisitorComponent
     {
         Amount = Mathf.Max(0, amount);
     }
-    
-    public override bool CanVisit(UnitComponent unitComponent)
+
+    public override bool CanVisit(UnitComponent target, OrderMode orderMode)
     {
-        return Amount > 0 && unitComponent.GetEntity().TryGetComponent(out HarvesterComponent harvesterComponent) 
+        return Amount > 0 && target.GetEntity().TryGetComponent(out HarvesterComponent harvesterComponent) 
                           && harvesterComponent.CanHarvest(ResourceType);
     }
 
-    protected override bool TryVisitImpl(UnitComponent target)
+    protected override bool TryVisitImpl(UnitComponent target, OrderMode orderMode)
     {
-        target.ReplaceCurrentCommand(new CompositeUnitCommand([
+        target.QueueCommand(new CompositeUnitCommand([
             new MoveToEntityCommand(GetEntity()),
             new HarvestCommand(this)
-        ]));
+        ]), orderMode);
         return true;
     }
 }

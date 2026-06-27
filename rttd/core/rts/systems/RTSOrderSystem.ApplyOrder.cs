@@ -6,7 +6,7 @@ namespace RTTD;
 public partial class RTSOrderSystem
 {
     private readonly List<UnitComponent> _unitsWaitingForOrder = new();
-    private void ApplyOrder(IReadOnlyList<UnitComponent> units, Vector2 targetPosition, Entity targetEntity = null)
+    private void ApplyOrder(IReadOnlyList<UnitComponent> units, Vector2 targetPosition, Entity targetEntity = null, OrderMode orderMode = OrderMode.Single)
     {
         GD.Print($"Apply order: {units.Count} unit(s) for targetEntity '{targetEntity?.GetName() ?? "NULL"}' and targetPosition {targetPosition}");
         if (units.Count == 0)
@@ -20,7 +20,7 @@ public partial class RTSOrderSystem
                 if (unit.GetEntity().TryGetComponent(out MoveToComponent moveToComponent))
                 {
                     Vector2 unitTargetPosition = targetPosition + Random.GetRandomPointInCircle(units.Count * 16);
-                    unit.ReplaceCurrentCommand(new MoveToPositionCommand(unitTargetPosition));
+                    unit.QueueCommand(new MoveToPositionCommand(unitTargetPosition), orderMode);
                 }
             }
 
@@ -33,12 +33,12 @@ public partial class RTSOrderSystem
         // if a Unit has been successfully visited by a UnitVisitorComponent, the Unit gets removed from the list (we consider the unit already received an order from the visitor)
         foreach (Node child in targetEntity.GetChildren(false))
         {
-            if (child is not UnitVisitorComponent unitVisitor)
+            if (child is not IUnitOrderVisitor unitVisitor)
                 continue;
 
             for (int i = 0; i < _unitsWaitingForOrder.Count; i++)
             {
-                if (unitVisitor.TryVisit(_unitsWaitingForOrder[i]))
+                if (unitVisitor.TryVisit(_unitsWaitingForOrder[i], orderMode))
                 {
                     _unitsWaitingForOrder.RemoveAt(i);
                     i--;

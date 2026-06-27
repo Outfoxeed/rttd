@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 
 namespace RTTD;
@@ -36,15 +35,9 @@ public class UnitCommandHandler : IUnitCommandHandler
         }
     }
 
-    public void AddCommand(IUnitCommand command)
+    public void QueueCommand(IUnitCommand command, OrderMode orderMode)
     {
-        command.SetUnit(_unit);
-        _commands.Add(command);
-    }
-
-    public void ReplaceCurrentCommand(IUnitCommand command)
-    {
-        ClearCommands();
+        if (orderMode is OrderMode.Single) ClearCommands();
         AddCommand(command);
     }
 
@@ -59,6 +52,12 @@ public class UnitCommandHandler : IUnitCommandHandler
     public bool HasCommandInProgress()
     {
         return TryGetCurrentCommand(out IUnitCommand currentCommand) && currentCommand.GetState() != UnitCommandState.Default;
+    }
+    
+    private void AddCommand(IUnitCommand command)
+    {
+        command.SetUnit(_unit);
+        _commands.Add(command);
     }
     
     private bool TryGetCurrentCommand(out IUnitCommand command)
