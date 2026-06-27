@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bttjrpu5x6sog"]
+
+[ext_resource type="PackedScene" uid="uid://c1eclvt58dhox" path="res://rttd/core/entity/entity_base.tscn" id="1_hhjq4"]
+[ext_resource type="Script" uid="uid://dwi4oe3jkn31c" path="res://rttd/core/ui/windows/WindowOpenerComponent.cs" id="2_boueh"]
+[ext_resource type="PackedScene" uid="uid://bgdhqsskd8h3m" path="res://rttd/tests/ui/windows/window_entitycomponent_test.tscn" id="3_f4hyv"]
+
+[node name="WindowOpenerTest" unique_id=721792293 instance=ExtResource("1_hhjq4")]
+collision_layer = 2
+
+[node name="Sprite2D" parent="." index="0" unique_id=1844973753]
+self_modulate = Color(0.737207, 0.5065969, 1, 1)
+
+[node name="WindowOpenerComponent" type="Node2D" parent="." index="2" unique_id=698282370]
+script = ExtResource("2_boueh")
+_windowPackedScene = ExtResource("3_f4hyv")
+metadata/_custom_type_script = "uid://dwi4oe3jkn31c"

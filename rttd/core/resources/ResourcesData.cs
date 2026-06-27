@@ -26,11 +26,30 @@ public partial class ResourcesData : Resource, IResourcesData
         AmountChanged?.Invoke(new ResourcesUpdatedArgs(type, oldAmount, _resources[type]));
     }
     
-    public void RemoveResources(ResourceType type, int amount) => AddResources(type, -amount);
+    public void RemoveResources(ResourceType type, int amount)
+    {
+        if (!Resources.TryGetValue(type, out int currentAmount))
+            return;
+        
+        int newAmount = Math.Max(0, currentAmount - amount);
+        _resources[type] = newAmount;
+        AmountChanged?.Invoke(new ResourcesUpdatedArgs(type, currentAmount, newAmount));
+    }
+
     public void ClearResources(ResourceType type)
     {
-        if (!_resources.ContainsKey(type))
+        if (!_resources.TryGetValue(type, out int currentAmount))
             return;
+        
+        _resources[type] = 0;
+        AmountChanged?.Invoke(new ResourcesUpdatedArgs(type, currentAmount, 0));
         AddResources(type, -_resources[type]);
+    }
+    
+    public bool TryBuy(ResourceType type, int amount)
+    {
+        bool success = Resources.TryGetValue(type, out int value) && value >= amount;
+        if(success) RemoveResources(type, amount);
+        return success;
     }
 }

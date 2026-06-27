@@ -13,3 +13,6 @@ _speedFactors = Dictionary[ExtResource("3_bthms"), float]({
 ExtResource("4_h6my8"): 1.0
 })
 metadata/_custom_type_script = "uid://cqqgr32ch7rdf"
+
+[node name="Sprite2D" parent="." index="3" unique_id=927261969]
+self_modulate = Color(0, 0.5529412, 0, 1)

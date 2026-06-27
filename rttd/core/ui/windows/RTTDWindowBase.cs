@@ -4,10 +4,10 @@ using Godot;
 namespace RTTD;
 
 [GlobalClass]
-public partial class RTTDWindow : Control
+public abstract partial class RTTDWindowBase : Control
 {
-    public Action<RTTDWindow> OnClosed;
-    public Action<RTTDWindow, bool> OnFolded;
+    public Action<RTTDWindowBase> OnClosed;
+    public Action<RTTDWindowBase, bool> OnFolded;
 
     [Export] private Control _mainBar;
     [Export] private BaseButton _closeButton;
@@ -43,7 +43,7 @@ public partial class RTTDWindow : Control
     public override void _ExitTree()
     {
         base._ExitTree();
-        
+		
         if (_mainBar is not null)
         {
             _mainBar.MouseEntered -= OnMainBarMouseEntered;
@@ -56,7 +56,7 @@ public partial class RTTDWindow : Control
     public override void _GuiInput(InputEvent @event)
     {
         base._GuiInput(@event);
-        
+		
         if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left } eventMouseButton)
         {
             if (!_isDragging && _isMouseHoveringMainBar)
@@ -67,7 +67,7 @@ public partial class RTTDWindow : Control
                 GetViewport().SetInputAsHandled();
                 return;
             }
-            
+			
             if (_isDragging && !eventMouseButton.IsPressed())
             {
                 _isDragging = false;
@@ -90,12 +90,14 @@ public partial class RTTDWindow : Control
             SetPosition(newPosition);
         }
     }
+	
+    public abstract void SetOwner(object owner);
 
     public void Close()
     {
         SetVisible(false);
         QueueFree();
-        
+		
         OnClosed?.Invoke(this);
     }
 
@@ -103,7 +105,7 @@ public partial class RTTDWindow : Control
     {
         _folded = !_folded;
         _contentContainer?.SetVisible(!_folded);
-        
+		
         OnFolded?.Invoke(this, _folded);
     }
 

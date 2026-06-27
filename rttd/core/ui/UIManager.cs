@@ -8,13 +8,13 @@ public partial class UIManager : SingletonNode<UIManager>
 {
     [Export] private Control _windowsContainer;
     
-    private readonly Dictionary<object, RTTDWindow> _windows = new();
+    private readonly Dictionary<object, RTTDWindowBase> _windows = new();
     
     public override void _ExitTree()
     {
         base._ExitTree();
 
-        foreach (RTTDWindow window in _windows.Values)
+        foreach (RTTDWindowBase window in _windows.Values)
         {
             if (window != null)
                 window.OnClosed -= OnWindowClosed;
@@ -26,7 +26,8 @@ public partial class UIManager : SingletonNode<UIManager>
         if (_windows.ContainsKey(owner))
             return;
         
-        RTTDWindow newWindow = windowPackedScene.Instantiate<RTTDWindow>();
+        RTTDWindowBase newWindow = windowPackedScene.Instantiate<RTTDWindowBase>();
+        newWindow.SetOwner(owner);
         _windowsContainer.AddChild(newWindow);
         newWindow.Position = screenPosition;
         _windows.Add(owner, newWindow);
@@ -35,13 +36,13 @@ public partial class UIManager : SingletonNode<UIManager>
 
     public void CloseAllWindows()
     {
-        foreach (RTTDWindow window in _windows.Values)
+        foreach (RTTDWindowBase window in _windows.Values)
         {
             window.Close();
         }
     }
     
-    private void OnWindowClosed(RTTDWindow closedWindow)
+    private void OnWindowClosed(RTTDWindowBase closedWindow)
     {
         closedWindow.OnClosed -= OnWindowClosed;
         

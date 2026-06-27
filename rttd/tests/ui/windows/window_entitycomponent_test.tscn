@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://bgdhqsskd8h3m"]
+
+[ext_resource type="PackedScene" uid="uid://bxxuucvuksx8u" path="res://rttd/core/ui/scene_windowbase.tscn" id="1_qtj2m"]
+[ext_resource type="Script" uid="uid://bo16204jn5j83" path="res://rttd/tests/ui/windows/RTTDWindowTest.cs" id="2_a5in4"]
+[ext_resource type="Resource" uid="uid://ygo1o6lxhgre" path="res://rttd/impl/resources/resourcetype_wood.tres" id="3_jemt1"]
+[ext_resource type="PackedScene" uid="uid://dfbiiwa75qxn4" path="res://rttd/impl/entities/unit_harvester.tscn" id="4_8uqa4"]
+
+[node name="WindowBase" unique_id=1582196630 node_paths=PackedStringArray("_button") instance=ExtResource("1_qtj2m")]
+script = ExtResource("2_a5in4")
+_button = NodePath("ColorRect2/VBoxContainer/WindowContent/Button")
+_resourceType = ExtResource("3_jemt1")
+_resourceAmount = 10
+_entityPackedScene = ExtResource("4_8uqa4")
+
+[node name="Button" type="Button" parent="ColorRect2/VBoxContainer/WindowContent" parent_id_path=PackedInt32Array(610193725) index="0" unique_id=626832937]
+layout_mode = 1
+offset_right = 216.0
+offset_bottom = 31.0
+text = "Do a thing"
