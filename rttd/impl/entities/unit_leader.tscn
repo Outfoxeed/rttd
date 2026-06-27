@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://dfmvcei45vjfu"]
+
+[ext_resource type="PackedScene" uid="uid://m8w3vj7rvvx7" path="res://rttd/impl/entities/unit_base.tscn" id="1_wapbs"]
+[ext_resource type="Shape2D" uid="uid://cr74pdv1xcqa8" path="res://rttd/impl/entities/collisionshape_unit_large.tres" id="2_ed0q2"]
+[ext_resource type="Script" uid="uid://d0mvotu1lmtjp" path="res://rttd/impl/resources/generators/ResourceGeneratorComponent.cs" id="2_irmvc"]
+[ext_resource type="Resource" uid="uid://dwl5kbpnggqqa" path="res://rttd/impl/resources/resourcetype_mana.tres" id="3_ed0q2"]
+
+[node name="UnitLeader" unique_id=999389320 instance=ExtResource("1_wapbs")]
+
+[node name="Sprite2D" parent="." index="2" unique_id=927261969]
+self_modulate = Color(0.078431375, 1, 1, 1)
+scale = Vector2(3.2, 3.2)
+
+[node name="CollisionShape2D" parent="." index="3" unique_id=174685169]
+shape = ExtResource("2_ed0q2")
+
+[node name="ResourceGeneratorComponent" type="Node2D" parent="." index="4" unique_id=804123965]
+script = ExtResource("2_irmvc")
+_resourceType = ExtResource("3_ed0q2")
+_resourceGainAmount = 1
+metadata/_custom_type_script = "uid://d0mvotu1lmtjp"

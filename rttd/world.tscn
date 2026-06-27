@@ -10,6 +10,7 @@
 [ext_resource type="Resource" uid="uid://ygo1o6lxhgre" path="res://rttd/impl/resources/resourcetype_wood.tres" id="7_j5sld"]
 [ext_resource type="Resource" uid="uid://bdbv1l478ad4q" path="res://rttd/core/resources/playerresourcesdata.tres" id="12_bukp4"]
 [ext_resource type="PackedScene" uid="uid://bttjrpu5x6sog" path="res://rttd/tests/ui/windows/entity_windowopener_test.tscn" id="12_gch3o"]
+[ext_resource type="PackedScene" uid="uid://dfmvcei45vjfu" path="res://rttd/impl/entities/unit_leader.tscn" id="13_awgja"]
 [ext_resource type="PackedScene" uid="uid://ja8nj0pq4rrn" path="res://rttd/ui/hud.tscn" id="13_gch3o"]
 [ext_resource type="PackedScene" uid="uid://dfbiiwa75qxn4" path="res://rttd/impl/entities/unit_harvester.tscn" id="17_ubc5p"]
 
@@ -88,3 +89,6 @@ metadata/_custom_type_script = "uid://ta15j38pkjt"
 
 [node name="UnitDefault" parent="." unique_id=999389320 instance=ExtResource("1_ok8j6")]
 position = Vector2(-196, 46)
+
+[node name="UnitLeader" parent="." unique_id=1998647855 instance=ExtResource("13_awgja")]
+position = Vector2(-202, 142)
