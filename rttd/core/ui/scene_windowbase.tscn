@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://ux7krqp662m2" path="res://rttd/core/ui/RTTDWindow.cs" id="1_v3p03"]
 [ext_resource type="Texture2D" uid="uid://dl4qe57ka51b" path="res://pixel.png" id="2_vj0e7"]
 
-[node name="WindowBase" type="Control" unique_id=1582196630 node_paths=PackedStringArray("_closeButton", "_contentContainer")]
+[node name="WindowBase" type="Control" unique_id=1582196630 node_paths=PackedStringArray("_mainBar", "_closeButton", "_contentContainer")]
 custom_minimum_size = Vector2(256, 384)
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_v3p03")
-_closeButton = NodePath("ColorRect2/VBoxContainer/HBoxContainer/CloseButton")
+_mainBar = NodePath("ColorRect2/VBoxContainer/MainBar")
+_closeButton = NodePath("ColorRect2/VBoxContainer/MainBar/CloseButton")
 _contentContainer = NodePath("ColorRect2/VBoxContainer/WindowContent")
 metadata/_custom_type_script = "uid://ux7krqp662m2"
 
@@ -19,6 +20,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 
 [node name="ColorRect2" type="ColorRect" parent="." unique_id=1621541740]
 layout_mode = 0
@@ -28,6 +30,7 @@ offset_right = 252.0
 offset_bottom = 380.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 color = Color(0.23392546, 0.23392546, 0.23392543, 1)
 
 [node name="VBoxContainer" type="VBoxContainer" parent="ColorRect2" unique_id=1999542606]
@@ -38,17 +41,18 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="ColorRect2/VBoxContainer" unique_id=1974773465]
+[node name="MainBar" type="HBoxContainer" parent="ColorRect2/VBoxContainer" unique_id=1974773465]
 custom_minimum_size = Vector2(0, 16)
 layout_mode = 2
 theme_override_constants/separation = 0
 
-[node name="ColorRect" type="ColorRect" parent="ColorRect2/VBoxContainer/HBoxContainer" unique_id=289845577]
+[node name="ColorRect" type="ColorRect" parent="ColorRect2/VBoxContainer/MainBar" unique_id=289845577]
 layout_mode = 2
 size_flags_horizontal = 3
+mouse_filter = 1
 color = Color(0.37706745, 0.5573436, 0.5817106, 1)
 
-[node name="CloseButton" type="TextureButton" parent="ColorRect2/VBoxContainer/HBoxContainer" unique_id=1278680982]
+[node name="CloseButton" type="TextureButton" parent="ColorRect2/VBoxContainer/MainBar" unique_id=1278680982]
 self_modulate = Color(1, 0, 0, 1)
 custom_minimum_size = Vector2(16, 0)
 layout_mode = 2
@@ -58,3 +62,4 @@ stretch_mode = 3
 
 [node name="WindowContent" type="Control" parent="ColorRect2/VBoxContainer" unique_id=1001829882]
 layout_mode = 2
+mouse_filter = 1

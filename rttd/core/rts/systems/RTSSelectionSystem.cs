@@ -22,9 +22,9 @@ public partial class RTSSelectionSystem : Node2D
         _selectionVisual.Visible = false;
     }
 
-    public override void _Input(InputEvent @event)
+    public override void _UnhandledInput(InputEvent @event)
     {
-        base._Input(@event);
+        base._UnhandledInput(@event);
 
         if (@event is InputEventMouseButton { ButtonIndex: MouseButton.Left } mouseButton)
         {
@@ -59,13 +59,6 @@ public partial class RTSSelectionSystem : Node2D
                 PrintSelectedUnits();
             }
         }
-        else if (@event is InputEventMouseMotion && _selecting)
-        {
-            _selectionRect.End = GetGlobalMousePosition();
-            UpdateSelectedList();
-            
-            GetViewport().SetInputAsHandled();
-        }
     }
 
     private void PrintSelectedUnits()
@@ -86,6 +79,9 @@ public partial class RTSSelectionSystem : Node2D
 
         if (_selecting)
         {
+            _selectionRect.End = GetGlobalMousePosition();
+            UpdateSelectedList();
+            
             _selectionVisual.GlobalPosition = _selectionRect.Position;
             _selectionVisual.Scale = _selectionRect.Size / _selectionVisualBaseSize;
         }
