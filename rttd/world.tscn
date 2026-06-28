@@ -8,10 +8,18 @@
 [ext_resource type="Texture2D" uid="uid://dl4qe57ka51b" path="res://pixel.png" id="6_oflq4"]
 [ext_resource type="Script" uid="uid://ta15j38pkjt" path="res://rttd/core/resources/PlayerResourcesManager.cs" id="7_awap8"]
 [ext_resource type="Resource" uid="uid://ygo1o6lxhgre" path="res://rttd/impl/resources/resourcetype_wood.tres" id="7_j5sld"]
+[ext_resource type="PackedScene" uid="uid://cxhwgsf78o3vy" path="res://rttd/core/rts/units/scene_unitcomponent.tscn" id="8_vdu1u"]
+[ext_resource type="Script" uid="uid://be27wkwhs3a54" path="res://rttd/core/rts/move/MoveToComponent.cs" id="9_ts7ld"]
+[ext_resource type="Script" uid="uid://cqqgr32ch7rdf" path="res://rttd/impl/harvest/HarvesterComponent.cs" id="10_ry7no"]
+[ext_resource type="Script" uid="uid://clmhgw5gtmef0" path="res://rttd/core/resources/ResourceType.cs" id="11_8gyvv"]
 [ext_resource type="Resource" uid="uid://bdbv1l478ad4q" path="res://rttd/core/resources/playerresourcesdata.tres" id="12_bukp4"]
 [ext_resource type="PackedScene" uid="uid://bttjrpu5x6sog" path="res://rttd/tests/ui/windows/entity_windowopener_test.tscn" id="12_gch3o"]
+[ext_resource type="Resource" uid="uid://b3gw2ko5x7inp" path="res://rttd/impl/resources/resourcetype_rocks.tres" id="12_gshx8"]
 [ext_resource type="PackedScene" uid="uid://dfmvcei45vjfu" path="res://rttd/impl/entities/unit_leader.tscn" id="13_awgja"]
 [ext_resource type="PackedScene" uid="uid://ja8nj0pq4rrn" path="res://rttd/ui/hud.tscn" id="13_gch3o"]
+[ext_resource type="Texture2D" uid="uid://b0rouc3hhjo72" path="res://circle.png" id="13_iwt2h"]
+[ext_resource type="PackedScene" uid="uid://biodsmid664os" path="res://rttd/tests/building_test.tscn" id="14_awgja"]
+[ext_resource type="Shape2D" uid="uid://dx1fgl5rj641n" path="res://rttd/impl/entities/collisionshape_unit_medium.tres" id="14_fjcts"]
 [ext_resource type="PackedScene" uid="uid://dfbiiwa75qxn4" path="res://rttd/impl/entities/unit_harvester.tscn" id="17_ubc5p"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_oflq4"]
@@ -77,6 +85,40 @@ texture = ExtResource("6_oflq4")
 [node name="UnitHarvester" parent="." unique_id=1340755278 instance=ExtResource("17_ubc5p")]
 position = Vector2(-80, 161)
 
+[node name="UnitRockHarvester" type="RigidBody2D" parent="." unique_id=1311480834 node_paths=PackedStringArray("_entitySizeCollisionShape")]
+position = Vector2(54, 73)
+collision_mask = 0
+input_pickable = true
+mass = 0.001
+gravity_scale = 0.0
+lock_rotation = true
+script = ExtResource("1_hp4hs")
+_entitySizeCollisionShape = NodePath("CollisionShape2D")
+metadata/_custom_type_script = "uid://0a7lk2750m1d"
+
+[node name="UnitComponent" parent="UnitRockHarvester" unique_id=1947146302 instance=ExtResource("8_vdu1u")]
+
+[node name="MoveToComponent" type="Node2D" parent="UnitRockHarvester" unique_id=1498965968]
+script = ExtResource("9_ts7ld")
+metadata/_custom_type_script = "uid://be27wkwhs3a54"
+
+[node name="HarvesterComponent" type="Node2D" parent="UnitRockHarvester" unique_id=406615250]
+script = ExtResource("10_ry7no")
+_speedFactors = Dictionary[ExtResource("11_8gyvv"), float]({
+ExtResource("12_gshx8"): 3.0
+})
+metadata/_custom_type_script = "uid://cqqgr32ch7rdf"
+
+[node name="Sprite2D" type="Sprite2D" parent="UnitRockHarvester" unique_id=927261969]
+self_modulate = Color(0.50534403, 0.5053441, 0.50534403, 1)
+texture_filter = 1
+position = Vector2(0, -0.99999994)
+scale = Vector2(1.6, 1.6)
+texture = ExtResource("13_iwt2h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UnitRockHarvester" unique_id=174685169]
+shape = ExtResource("14_fjcts")
+
 [node name="WindowOpenerTest" parent="." unique_id=721792293 instance=ExtResource("12_gch3o")]
 position = Vector2(141, 190)
 
@@ -92,3 +134,6 @@ position = Vector2(-196, 46)
 
 [node name="UnitLeader" parent="." unique_id=1998647855 instance=ExtResource("13_awgja")]
 position = Vector2(-202, 142)
+
+[node name="BuildingTest" parent="." unique_id=1096268960 instance=ExtResource("14_awgja")]
+position = Vector2(-95, -51)

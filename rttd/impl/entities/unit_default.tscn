@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://clmhgw5gtmef0" path="res://rttd/core/resources/ResourceType.cs" id="3_ksojt"]
 [ext_resource type="Resource" uid="uid://b3gw2ko5x7inp" path="res://rttd/impl/resources/resourcetype_rocks.tres" id="4_p1p4n"]
 [ext_resource type="Resource" uid="uid://ygo1o6lxhgre" path="res://rttd/impl/resources/resourcetype_wood.tres" id="5_5xlji"]
+[ext_resource type="Script" uid="uid://cd5oh6ukqdea1" path="res://rttd/impl/building/WorkerComponent.cs" id="6_ksojt"]
 
 [node name="UnitDefault" unique_id=999389320 instance=ExtResource("1_6x7ve")]
 
@@ -18,3 +19,7 @@ ExtResource("4_p1p4n"): 0.2,
 ExtResource("5_5xlji"): 0.2
 })
 metadata/_custom_type_script = "uid://cqqgr32ch7rdf"
+
+[node name="WorkerComponent" type="Node2D" parent="." index="5" unique_id=1605171350]
+script = ExtResource("6_ksojt")
+metadata/_custom_type_script = "uid://cd5oh6ukqdea1"

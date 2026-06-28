@@ -1,0 +1,40 @@
+[gd_scene format=3 uid="uid://c5y0yysdh650c"]
+
+[ext_resource type="PackedScene" uid="uid://c1eclvt58dhox" path="res://rttd/core/entity/entity_base.tscn" id="1_vdnu1"]
+[ext_resource type="Script" uid="uid://b13yycnifb4l3" path="res://rttd/impl/building/BuildingComponent.cs" id="2_r7kou"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dl8n6"]
+size = Vector2(64, 64)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vdnu1"]
+bg_color = Color(0.05851464, 0.67544323, 0.7580252, 1)
+
+[node name="BuildingBase" unique_id=721792293 instance=ExtResource("1_vdnu1")]
+collision_layer = 2
+collision_mask = 3
+freeze = true
+
+[node name="Sprite2D" parent="." index="0" unique_id=1844973753]
+scale = Vector2(6.4, 6.4)
+
+[node name="CollisionShape2D" parent="." index="1" unique_id=1097842781]
+shape = SubResource("RectangleShape2D_dl8n6")
+
+[node name="BuildingComponent" type="Node2D" parent="." index="2" unique_id=2095041200 node_paths=PackedStringArray("_progressSlider")]
+script = ExtResource("2_r7kou")
+_progressSlider = NodePath("HSlider")
+metadata/_custom_type_script = "uid://b13yycnifb4l3"
+
+[node name="HSlider" type="HSlider" parent="BuildingComponent" index="0" unique_id=430551968]
+visible = false
+offset_left = -32.0
+offset_top = 35.0
+offset_right = 32.0
+offset_bottom = 51.0
+theme_override_styles/grabber_area = SubResource("StyleBoxFlat_vdnu1")
+max_value = 1.0
+step = 0.0
+value = 0.895
+editable = false
+scrollable = false
+ticks_position = 3
