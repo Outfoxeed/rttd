@@ -109,7 +109,16 @@ public partial class EntityComponentsContainer : IEntityComponentsContainer
         
         return _entries[componentEntryIndex].GetAll<T>();
     }
-    
+
+    public IEntityComponent[] GetAllComponents()
+    {
+        List<IEntityComponent> result = new List<IEntityComponent>(_entries.Count);
+        for (int i = 0; i < _entries.Count; i++)
+            foreach (IEntityComponent entityComponent in _entries[i].Components)
+                result.Add(entityComponent);
+        return result.ToArray();
+    }
+
     private bool TryGetComponentEntry<T>(out int componentEntryIndex) => TryGetComponentEntry(typeof(T), out componentEntryIndex);
     private bool TryGetComponentEntry(Type componentType, out int componentEntryIndex)
     {

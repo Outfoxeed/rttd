@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Godot;
 
 namespace RTTD;
@@ -8,6 +9,7 @@ public partial class EntityComponentsContainer
     private struct ComponentEntry
     {
         public Type ComponentType { get; }
+        public IReadOnlyCollection<IEntityComponent> Components => _components;
         private IEntityComponent[] _components;
         private readonly Entity _entity;
 

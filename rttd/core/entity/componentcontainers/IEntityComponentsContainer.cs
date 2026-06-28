@@ -11,4 +11,5 @@ public interface IEntityComponentsContainer
     T GetComponent<T>() where T : IEntityComponent;
     bool TryGetAllComponents<T>(out T[] components) where T : IEntityComponent;
     T[] GetAllComponents<T>() where T : IEntityComponent;
+    IEntityComponent[] GetAllComponents();
 }
