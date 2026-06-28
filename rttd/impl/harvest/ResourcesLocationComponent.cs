@@ -16,7 +16,7 @@ public partial class ResourcesLocationComponent : UnitOrderComponentVisitor
         Amount = Mathf.Max(0, amount);
     }
 
-    public override bool CanVisit(UnitComponent target, OrderMode orderMode)
+    public override bool CanVisitImpl(UnitComponent target, OrderMode orderMode)
     {
         return Amount > 0 && target.GetEntity().TryGetComponent(out HarvesterComponent harvesterComponent) 
                           && harvesterComponent.CanHarvest(ResourceType);

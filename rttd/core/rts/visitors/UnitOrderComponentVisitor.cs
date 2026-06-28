@@ -6,11 +6,15 @@ namespace RTTD;
 [GlobalClass]
 public abstract partial class UnitOrderComponentVisitor : EntityComponent, IUnitOrderVisitor
 {
-    public abstract bool CanVisit(UnitComponent target, OrderMode orderMode);
+    public bool CanVisit(UnitComponent target, OrderMode orderMode)
+    {
+        return Enabled && CanVisitImpl(target, orderMode);
+    }
     public bool TryVisit(UnitComponent target, OrderMode orderMode)
     {
         return CanVisit(target, orderMode) && TryVisitImpl(target, orderMode);
     }
 
+    public abstract bool CanVisitImpl(UnitComponent target, OrderMode orderMode);
     protected abstract bool TryVisitImpl(UnitComponent target, OrderMode orderMode);
 }
