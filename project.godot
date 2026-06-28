@@ -29,5 +29,5 @@ project/assembly_name="RTTD"
 [layer_names]
 
 2d_physics/layer_1="Unit"
-2d_physics/layer_2="Building"
+2d_physics/layer_2="Structures"
 2d_physics/layer_8="Selection"
