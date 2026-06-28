@@ -83,6 +83,15 @@ public abstract class UnitCommand : IUnitCommand
     }
     protected abstract void ProcessImpl();
 
+    private void OnFinished()
+    {
+        if (GetState() is not (UnitCommandState.Success or UnitCommandState.Failed or UnitCommandState.Cancelled))
+            return;
+
+        OnFinishedImpl();
+    }
+    protected virtual void OnFinishedImpl() { }
+
     protected Entity GetEntity() => GetUnit().GetEntity();
     public UnitComponent GetUnit() => _unit;
     public void SetUnit(UnitComponent unit) => _unit = unit;
@@ -92,6 +101,11 @@ public abstract class UnitCommand : IUnitCommand
         if (_state == state)
             return;
         _state = state;
+
+        if (_state is UnitCommandState.Success or UnitCommandState.Failed or UnitCommandState.Cancelled)
+        {
+            OnFinished();
+        }
         
         if (state is UnitCommandState.Failed)
         {
