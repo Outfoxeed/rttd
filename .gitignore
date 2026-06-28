@@ -8,3 +8,10 @@ builds/
 # IDE
 .idea/
 .vs/
+
+# User settings
+*.sln.DotSettings.user
+
+# Temp folders (including the ones in rider godot plugin)
+**/~*
+**/~*/
