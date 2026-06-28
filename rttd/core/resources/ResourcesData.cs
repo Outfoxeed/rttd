@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
+using System.Runtime.ExceptionServices;
 using Godot;
 
 namespace RTTD;
@@ -48,8 +50,20 @@ public partial class ResourcesData : Resource, IResourcesData
     
     public bool TryBuy(ResourceType type, int amount)
     {
-        bool success = Resources.TryGetValue(type, out int value) && value >= amount;
+        bool success = this.HasResources(type, amount);
         if(success) RemoveResources(type, amount);
         return success;
+    }
+
+    public bool TryBuy(IResourcesData cost)
+    {
+        if (!this.HasResources(cost))
+            return false;
+
+        foreach (var (resourceType, amount) in cost.Resources)
+        {
+            RemoveResources(resourceType, amount);
+        }
+        return true;
     }
 }

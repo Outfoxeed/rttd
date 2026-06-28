@@ -12,20 +12,22 @@ public class CompositeUnitCommand : UnitCommand
         _commands = commands;
     }
 
-    protected override async Task RunAsyncImpl()
+    protected override async Task<bool> RunAsyncImpl()
     {
         if (_commands.Length == 0)
         {
             SetState(UnitCommandState.Failed);
-            return;
+            return false;
         }
         
         foreach (IUnitCommand command in _commands)
         {
             command.SetUnit(GetUnit());
         }
-        
-        await _commands[0].RunAsync();
+
+        IUnitCommand firstCommand = _commands[0];
+        await firstCommand.RunAsync();
+        return firstCommand.GetState() is not UnitCommandState.Failed;
     }
 
     protected override async Task CancelAsyncImpl()

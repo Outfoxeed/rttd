@@ -21,20 +21,22 @@ public abstract class UnitCommand : IUnitCommand
         if (_unit == null)
         {
             Logger.LogError(null, $"Command {this} has no valid unit! Cannot start command.");
+            SetState(UnitCommandState.Failed);
             return;
         }
         
         if (GetState() != UnitCommandState.Default)
         {
             Logger.LogError(_unit, $"Command {this} already ran ({_state}). Cannot run it again.");
+            SetState(UnitCommandState.Failed);
             return;
         }
         
         SetState(UnitCommandState.Starting);
         try
         {
-            await RunAsyncImpl();
-            SetState(UnitCommandState.Running);
+            bool runAsyncSuccess = await RunAsyncImpl();
+            SetState(runAsyncSuccess ? UnitCommandState.Running : UnitCommandState.Failed);
         }
         catch (Exception e)
         {
@@ -42,7 +44,7 @@ public abstract class UnitCommand : IUnitCommand
             SetState(UnitCommandState.Failed);
         }
     }
-    protected abstract Task RunAsyncImpl();
+    protected abstract Task<bool> RunAsyncImpl(); // Throwing an exception in the impl results in a failed command
 
     public async Task CancelAsync()
     {

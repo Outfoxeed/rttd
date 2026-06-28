@@ -16,13 +16,13 @@ public abstract class MoveToCommandBase : UnitCommand
     {
     }
 
-    protected override Task RunAsyncImpl()
+    protected override Task<bool> RunAsyncImpl()
     {
         _moveToComponent = GetEntity().GetComponent<MoveToComponent>();
         
         UpdateVelocity();
         _lastUpdateTime = Time.GetTicksMsec();
-        return Task.CompletedTask;
+        return Task.FromResult(true);
     }
 
     protected override Task CancelAsyncImpl()

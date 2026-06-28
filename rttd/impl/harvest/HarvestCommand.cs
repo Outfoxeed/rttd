@@ -15,13 +15,13 @@ public class HarvestCommand : UnitCommand
         _location = location;
     }
 
-    protected override Task RunAsyncImpl()
+    protected override Task<bool> RunAsyncImpl()
     {
         _harvester = GetEntity().GetComponent<HarvesterComponent>();
         _lastHarvestTime = Time.GetTicksMsec();
         GetEntity().LinearVelocity = Vector2.Zero;
         
-        return Task.CompletedTask;
+        return Task.FromResult(true);
     }
 
     protected override Task CancelAsyncImpl()
