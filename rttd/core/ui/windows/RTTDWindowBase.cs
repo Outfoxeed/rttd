@@ -24,13 +24,13 @@ public abstract partial class RTTDWindowBase : Control
     {
         base._EnterTree();
 
-        if (_mainBar is not null)
+        if (_mainBar.IsValid())
         {
             _mainBar.MouseEntered += OnMainBarMouseEntered;
             _mainBar.MouseExited += OnMainBarMouseExited;
         }
-        if (_closeButton is not null) _closeButton.Pressed += OnCloseButtonPressed;
-        if (_foldButton is not null)
+        if (_closeButton.IsValid()) _closeButton.Pressed += OnCloseButtonPressed;
+        if (_foldButton.IsValid())
         {
             _foldButton.SetVisible(_foldable);
             _foldButton.Pressed += OnFoldButtonPressed;
@@ -44,13 +44,13 @@ public abstract partial class RTTDWindowBase : Control
     {
         base._ExitTree();
 		
-        if (_mainBar is not null)
+        if (_mainBar.IsValid())
         {
             _mainBar.MouseEntered -= OnMainBarMouseEntered;
             _mainBar.MouseExited -= OnMainBarMouseExited;
         }
-        if (_closeButton is not null) _closeButton.Pressed -= OnCloseButtonPressed;
-        if(_foldButton is not null) _foldButton.Pressed -= OnFoldButtonPressed;
+        if (_closeButton.IsValid()) _closeButton.Pressed -= OnCloseButtonPressed;
+        if(_foldButton.IsValid()) _foldButton.Pressed -= OnFoldButtonPressed;
     }
 
     public override void _GuiInput(InputEvent @event)

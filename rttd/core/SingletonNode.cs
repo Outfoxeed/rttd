@@ -10,7 +10,7 @@ public abstract partial class SingletonNode<T> : Node where T : SingletonNode<T>
     {
         base._EnterTree();
         
-        if (Instance != null && Instance != this)
+        if (Instance.IsValid() && Instance != this)
         {
             QueueFree();
             return;

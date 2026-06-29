@@ -16,7 +16,7 @@ public partial class UIManager : SingletonNode<UIManager>
 
         foreach (RTTDWindowBase window in _windows.Values)
         {
-            if (window != null)
+            if (window.IsValid())
                 window.OnClosed -= OnWindowClosed;
         }
     }

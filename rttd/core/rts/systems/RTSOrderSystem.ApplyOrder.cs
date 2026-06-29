@@ -13,7 +13,7 @@ public partial class RTSOrderSystem
             return;
         
         // Give a MoveToPosition to all units in the case where only a location is targeted 
-        if (targetEntity == null)
+        if (!targetEntity.IsValid())
         {
             foreach (UnitComponent unit in units)
             {

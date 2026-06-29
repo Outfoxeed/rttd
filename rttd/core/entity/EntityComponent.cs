@@ -7,7 +7,7 @@ public partial class EntityComponent : Node2D, IEntityComponent
 {
     public bool Enabled { get; set; } = true;
     
-    private Entity _entity;
+    private Entity _entity = null;
 
     public Entity GetEntity()
     {

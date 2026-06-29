@@ -29,7 +29,7 @@ public partial class ResourcesDataDisplayer : Control
     {
         base._ExitTree();
 
-        if (_resources != null)
+        if (_resources.IsValid())
         {
             _resources.AmountChanged -= OnResourcesAmountChanged;
         }

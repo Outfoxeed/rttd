@@ -44,7 +44,7 @@ public class BuildCommand : UnitCommand
 
     protected override void ProcessImpl()
     {
-        if (_buildingComponent == null)
+        if (!_buildingComponent.IsValid())
         {
             SetState(UnitCommandState.Failed);
             return;
@@ -61,12 +61,12 @@ public class BuildCommand : UnitCommand
     {
         base.OnFinishedImpl();
 
-        if (_timer != null)
+        if (_timer.IsValid())
         {
             _timer.Timeout -= OnTimerTimeout;
             _timer.Stop();
 
-            if (_workerComponent != null)
+            if (_workerComponent.IsValid())
             {
                 _workerComponent.RemoveChild(_timer);
             }
@@ -75,7 +75,7 @@ public class BuildCommand : UnitCommand
 
     private void OnTimerTimeout()
     {
-        if (_buildingComponent == null)
+        if (!_buildingComponent.IsValid())
         {
             SetState(UnitCommandState.Failed);
             return;

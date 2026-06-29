@@ -31,7 +31,7 @@ public partial class BuildingComponent : UnitOrderComponentVisitor
         }
         GetEntity().Modulate = Colors.Black;
 
-        if (_progressSlider is not null)
+        if (_progressSlider.IsValid())
         {
             _progressSlider.Visible = false;
             _progressSlider.MinValue = 0f;
@@ -57,7 +57,7 @@ public partial class BuildingComponent : UnitOrderComponentVisitor
         _currentWorkAmount += workAmount;
         _currentWorkRatio = Math.Clamp(_currentWorkAmount / _neededWorkAmount, 0f, 1f);
         GetEntity().Modulate = Colors.Black.Lerp(Colors.White, _currentWorkRatio);
-        if (_progressSlider is not null)
+        if (_progressSlider.IsValid())
         {
             _progressSlider.Value = _currentWorkRatio;
             _progressSlider.Visible = true;
@@ -72,7 +72,7 @@ public partial class BuildingComponent : UnitOrderComponentVisitor
         {
             entityComponent.Enabled = true;
         }
-        if (_progressSlider is not null) _progressSlider.Visible = false;
+        if (_progressSlider.IsValid()) _progressSlider.Visible = false;
         return true;
     }
     

@@ -15,7 +15,7 @@ public partial class ResourceGeneratorComponent : EntityComponent
     {
         base._EnterTree();
 
-        if (_timer == null)
+        if (!_timer.IsValid())
         {
             _timer = new Timer();
             AddChild(_timer);
@@ -33,7 +33,7 @@ public partial class ResourceGeneratorComponent : EntityComponent
     {
         base._ExitTree();
 
-        if (_timer != null)
+        if (_timer.IsValid())
         {
             _timer.Timeout -= OnTimerTimeout;
             _timer.Stop();

@@ -18,7 +18,7 @@ public abstract class UnitCommand : IUnitCommand
     
     public async Task RunAsync()
     {
-        if (_unit == null)
+        if (!_unit.IsValid())
         {
             Logger.LogError(null, $"Command {this} has no valid unit! Cannot start command.");
             SetState(UnitCommandState.Failed);

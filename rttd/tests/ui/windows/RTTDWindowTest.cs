@@ -14,12 +14,12 @@ public partial class RTTDWindowTest : RTTDWindowEntityComponent
     public override void _EnterTree()
     {
         base._EnterTree();
-        if(_button is not null) _button.Pressed += OnButtonPressed;
+        if(_button.IsValid()) _button.Pressed += OnButtonPressed;
     }
 
     public override void _ExitTree()
     {
-        if(_button is not null) _button.Pressed -= OnButtonPressed;
+        if(_button.IsValid()) _button.Pressed -= OnButtonPressed;
         base._ExitTree();
     }
 

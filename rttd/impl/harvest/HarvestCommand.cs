@@ -31,7 +31,7 @@ public class HarvestCommand : UnitCommand
 
     protected override void ProcessImpl()
     {
-        if (_location == null || _location.Amount <= 0)
+        if (!_location.IsValid() || _location.Amount <= 0)
         {
             SetState(UnitCommandState.Success);
             return;
